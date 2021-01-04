@@ -23,7 +23,7 @@ new Vue({
   render: h => h(App),
   created: function () {
       this.$storyblok.init({
-      accessToken: 'KlFg08TYitlAVnY2vfAalwtt'
+      accessToken: 'TsPJE5kvyacIkRQk19ILsgtt'
       })
     }
   }).$mount('#app')

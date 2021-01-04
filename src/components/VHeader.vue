@@ -1,48 +1,56 @@
 <template>
   <header>
     <div class="logo">
-      <a href="/"><img alt="black lives matter morristown nj" src="/img/logo.png"/></a>
+      <img
+        alt="black lives matter"
+        src="/img/logo.png"
+      />
+      <p>{{ story.content.logo }}</p>
     </div>
-    <v-menu/>
   </header>
 </template>
 
 <script>
-  import VMenu from './VMenu'
+import storyblok from '../mixins/storyblok.mixin'
 
-  export default {
-    name: 'VHeader',
-    components: { VMenu }
+export default {
+  name: 'VHeader',
+  mixins: [storyblok],
+  data () {
+    return {
+      slug: 'website-information'
+    }
   }
+}
 </script>
 
-<style lang="scss" scoped>
-  @import "src/assets/scss/breakpoints";
+<style
+  lang="scss"
+  scoped
+>
+@import "src/assets/scss/breakpoints";
 
-  header {
-    position: relative;
-    z-index: 100;
-    @media all and (max-width: $medium - 1) {
-      height: 55px;
-    }
+header {
+  position: relative;
+  z-index: 100;
+  font-family: var(--font-family-tertiary);
+  text-transform: uppercase;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  padding: 1rem;
+  width: 175px;
+  @media all and (min-width: $large) {
+    width: 220px;
+    font-size: 1.25rem;
   }
 
-  .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: white;
-    width: 100px;
-    height: 110px;
-    display: flex;
-    padding: 1rem;
-    @media all and (min-width: $medium) {
-      left: 0;
-      width: 150px;
-      height: 175px;
-    }
-    @media all and (min-width: $large) {
-      left: 1rem;
-    }
+  p {
+    margin-top: .25rem;
   }
+}
 </style>

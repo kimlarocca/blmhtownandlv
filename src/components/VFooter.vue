@@ -1,48 +1,53 @@
 <template>
   <footer>
     <div class="logo u-align--center u-space--double--bottom">
-      <a href="/"><img alt="black lives matter morristown nj" src="/img/logo-footer.png"/></a>
+      <img
+        alt="black lives matter"
+        src="/img/logo-footer.png"
+      />
+      <p>{{ story.content.logo }}</p>
     </div>
-    <nav class="l-container u-align--center">
-      <ul>
-        <li v-for="(link, index) in navigation" :key="index">
-          <a :href="link.url" :target="link.target">{{link.name}}</a>
-        </li>
-      </ul>
-    </nav>
     <ul class="social-links u-align--center u-space--double--top">
       <social-link
-        v-if="facebook"
+        v-if="story.content.facebook.url"
         icon="fab fa-facebook-f"
-        :link="facebook"
-        label="facebook">
+        :link="story.content.facebook.url"
+        label="facebook"
+      >
       </social-link>
       <social-link
-        v-if="twitter"
+        v-if="story.content.twitter.url"
         icon="fab fa-twitter"
-        :link="twitter"
+        :link="story.content.twitter.url"
         label="twitter"
       >
       </social-link>
       <social-link
-        v-if="youtube"
+        v-if="story.content.youtube.url"
         icon="fab fa-youtube"
-        :link="youtube"
+        :link="story.content.youtube.url"
         label="youtube"
       >
       </social-link>
       <social-link
-        v-if="instagram"
+        v-if="story.content.instagram.url"
         icon="fab fa-instagram"
-        :link="instagram"
+        :link="story.content.instagram.url"
         label="instagram"
       >
       </social-link>
       <social-link
-        v-if="linkedin"
+        v-if="story.content.linkedin.url"
         icon="fab fa-linkedin-in"
-        :link="linkedin"
+        :link="story.content.linkedin.url"
         label="linkedin"
+      >
+      </social-link>
+      <social-link
+        v-if="story.content.vimeo.url"
+        icon="fab fa-vimeo"
+        :link="story.content.vimeo.url"
+        label="vimeo"
       >
       </social-link>
     </ul>
@@ -50,71 +55,53 @@
 </template>
 
 <script>
-  import SocialLink from 'vue-evolve/src/components/SocialLink'
-  import navigation from '../assets/json/navigation'
-  import storyblok from '../mixins/storyblok.mixin'
+import SocialLink from 'vue-evolve/src/components/SocialLink'
+import storyblok from '../mixins/storyblok.mixin'
+
 export default {
-    name: 'VFooter',
-    components: { SocialLink },
-    mixins: [storyblok],
-    data: function () {
-      return {
-        navigation: navigation.navigation,
-        slug: 'footer'
-      }
-    },
-    computed: {
-      facebook () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].facebook.url
-      },
-      twitter () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].twitter.url
-      },
-      youtube () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].youtube.url
-      },
-      instagram () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].instagram.url
-      },
-      linkedin () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].linkedin.url
-      }
+  name: 'VFooter',
+  mixins: [storyblok],
+  data () {
+    return {
+      slug: 'website-information'
     }
-  }
+  },
+  components: { SocialLink }
+}
 </script>
 
-<style lang="scss" scoped>
-  footer {
-    background: var(--color-black);
-    padding: 3rem;
-    color: var(--color-white);
+<style
+  lang="scss"
+  scoped
+>
+footer {
+  background: var(--color-black);
+  padding: 3rem;
+  color: var(--color-white);
+  font-size: 1.25rem;
+  font-family: var(--font-family-tertiary);
+  text-transform: uppercase;
 
-    .logo {
-      filter: invert(100%);
-    }
+  .logo {
+    margin: auto;
+    max-width: 300px;
 
-    nav {
-      ul {
-        list-style: none;
-
-        li {
-          display: inline-block;
-          margin: .5rem;
-        }
-      }
-    }
-
-    a,
-    a:visited,
-    a:active {
-      color: var(--color-white);
-      font-weight: 600;
-      font-family: var(--font-family-tertiary);
-      font-size: var(--font-size-7);
-
-      &:hover {
-        color: var(--color-primary);
-      }
+    p {
+      margin-top: .25rem;
     }
   }
+
+  a,
+  a:visited,
+  a:active {
+    color: var(--color-white);
+    font-weight: 600;
+    font-family: var(--font-family-tertiary);
+    font-size: var(--font-size-7);
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
 </style>

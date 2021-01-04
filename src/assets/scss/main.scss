@@ -12,18 +12,6 @@
 @import "transitions";
 @import "rich-text";
 
-main {
-  margin: 0;
-  @media all and (min-width: $medium) {
-    margin: 2rem;
-    min-height: calc(100vh - 4rem);
-  }
-  @media all and (min-width: $large) {
-    margin: 3rem;
-    min-height: calc(100vh - 6rem);
-  }
-}
-
 // overrides
 .button {
   font-family: var(--font-family-tertiary);

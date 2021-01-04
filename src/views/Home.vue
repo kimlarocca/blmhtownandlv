@@ -1,193 +1,129 @@
 <template>
   <div class="home">
-    <section class="home-hero"></section>
-    <section class="l-container">
-      <h1>{{ title }}</h1>
-      <div class="u-align--center"><a class="button arrow" href="/Contact">how to join</a></div>
+    <section class="home-hero">
+      <div class="home-hero-desktop">
+        <img
+          :src="story.content.hero.filename"
+          :alt="story.content.hero.alt"
+        />
+      </div>
+      <div class="home-hero-mobile">
+        <img
+          :src="story.content.hero_mobile.filename"
+          :alt="story.content.hero_mobile.alt"
+        />
+      </div>
     </section>
-    <v-spacer size="quin"/>
     <section class="l-container">
-      <content-card
-        :title="content_title"
-        :link="content_url"
-        :cta="content_link_copy"
-        :video="content_video_url"
-        :image="content_image_filename"
-        altText="Real Talk Matters"
-        verticalAlignment="middle"
-      >
-        <template slot="content">
-          <p class="u-space--bottom">
-            {{ content_body }}
-          </p>
-        </template>
-      </content-card>
+      <h1>{{ story.content.h1 }}</h1>
+      <div class="u-align--center">
+        <a
+          class="button arrow"
+          :href="story.content.cta_url.url"
+        >
+          {{ story.content.cta }}
+        </a>
+      </div>
     </section>
-    <v-spacer size="quin"/>
+    <v-spacer size="quin" />
+    <main-content />
+    <v-spacer size="quin" />
     <div class="l-container">
       <hr>
     </div>
-    <v-spacer size="quin"/>
+    <v-spacer size="quin" />
     <section class="l-container">
       <h2 class="u-space--double--bottom u-align--center">Local News</h2>
-      <div class="l-grid l-grid--3up">
-        <template v-for="article in local_news">
-          <card
-            :key="article._uid"
-            :image="article.image.filename"
-            :altText="article.title"
-            :subtitle="article.title"
-            :hasTextLink="true"
-            cta="Read More"
-            :link="article.link.url"
-            :description="article.blurb"
-          />
-        </template>
-      </div>
+      <local-news />
     </section>
-    <v-spacer size="quin"/>
+    <v-spacer size="quin" />
     <div class="l-container">
       <hr>
     </div>
-    <v-spacer size="quin"/>
+    <v-spacer size="quin" />
     <section class="l-container">
       <h2 class="u-space--double--bottom u-align--center">National News</h2>
-      <div class="l-grid l-grid--3up">
-        <template v-for="article in national_news">
-          <card
-            :key="article._uid"
-            :image="article.image.filename"
-            :altText="article.title"
-            :subtitle="article.title"
-            :hasTextLink="true"
-            cta="Read More"
-            :link="article.link.url"
-            :description="article.blurb"
-          />
-        </template>
-      </div>
+      <national-news />
     </section>
+    <v-spacer size="quin" />
   </div>
 </template>
 
 <script>
-  import ContentCard from 'vue-evolve/src/components/ContentCard'
-  import VSpacer from 'vue-evolve/src/components/VSpacer'
-  import Card from 'vue-evolve/src/components/Card'
-  import storyblok from '../mixins/storyblok.mixin'
+import MainContent from '../components/MainContent'
+import LocalNews from '../components/LocalNews'
+import NationalNews from '../components/NationalNews'
+import VSpacer from 'vue-evolve/src/components/VSpacer'
+import storyblok from '../mixins/storyblok.mixin'
 
-  export default {
-    name: 'Home',
-    mixins: [storyblok],
-    data () {
-      return {
-        slug: 'Home'
-      }
-    },
-    metaInfo () {
-      return {
-        title: 'Black Lives Matter Morristown',
-        meta: [
-          {
-            name: 'description',
-            content: 'The website of the Morristown NJ chapter for Black Lives Matter.'
-          }
-        ]
-      }
-    },
-    components: {
-      ContentCard,
-      VSpacer,
-      Card
-    },
-    computed: {
-      title () {
-        return this.story.content && this.story.content.body && this.story.content.body[0].headline_h1
-      },
-      content_title () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].title
-      },
-      content_url () {
-        return this.story.content &&
-        this.story.content.body &&
-        this.story.content.body[1].bottom_link.url
-          ? this.story.content.body[1].bottom_link.url
-          : this.story.content.body[1].bottom_link.cached_url
-      },
-      content_link_copy () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].bottom_link_copy
-      },
-      content_video_url () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].video.url
-      },
-      content_image_filename () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].image.filename
-      },
-      content_body () {
-        return this.story.content && this.story.content.body && this.story.content.body[1].content.content[0].content[0].text
-      },
-      local_news () {
-        return this.story && this.story.content && this.story.content.body && this.story.content.body.filter(article => article.component === 'local-news')
-      },
-      national_news () {
-        return this.story && this.story.content && this.story.content.body && this.story.content.body.filter(article => article.component === 'national-news')
-      }
+export default {
+  name: 'Home',
+  mixins: [storyblok],
+  data () {
+    return {
+      slug: 'website-information'
     }
+  },
+  metaInfo () {
+    return {
+      title: this.story.content.title,
+      meta: [
+        {
+          name: 'description',
+          content: this.story.content.title
+        }
+      ]
+    }
+  },
+  components: {
+    MainContent,
+    LocalNews,
+    NationalNews,
+    VSpacer
   }
+}
 </script>
 
-<style lang="scss" scoped>
-  @import "../assets/scss/breakpoints";
+<style
+  lang="scss"
+  scoped
+>
+@import "../assets/scss/breakpoints";
 
-  .home {
-    margin-top: -60px;
-    @media all and (min-width: $medium) {
-      margin-top: 0;
-    }
+.home-hero {
+
+  .home-hero-desktop {
+    display: none;
   }
 
-  .home-hero {
-    background: url('/img/hero-small.jpg') no-repeat top right;
-    min-height: 640px;
-    @media all and (min-width: $medium) {
-      background: url('/img/hero.jpg') no-repeat top right;
-      min-height: 900px;
+  @media all and (min-width: $medium) {
+    .home-hero-mobile {
+      display: none;
+    }
+    .home-hero-desktop {
+      display: block;
     }
   }
+}
 
-  .home h1 {
-    max-width: 1100px;
-    position: relative;
-    z-index: 20;
-    transform: rotate(-10deg);
-    margin: -.5rem 1rem 2.5rem auto;
-    font-size: 2rem;
+.home h1 {
+  max-width: 1100px;
+  position: relative;
+  z-index: 20;
+  margin: 3rem auto;
+  font-size: 2rem;
+  line-height: 3rem;
+  text-align: center;
+
+  @media all and (min-width: $medium) {
+    font-size: 3rem;
     line-height: 3rem;
-    text-align: center;
-
-    @media all and (min-width: $medium) {
-      text-align: left;
-      font-size: 3rem;
-      line-height: 3rem;
-    }
-
-    @media all and (min-width: $large) {
-      margin: -2rem 0 3rem 4rem;
-      font-size: 4.5rem;
-      line-height: 4.5rem;
-    }
-
-    span {
-      &:last-child {
-        margin-left: 1rem;
-        @media all and (min-width: $medium) {
-          display: block;
-          margin-left: 3rem;
-        }
-        @media all and (min-width: $large) {
-          margin-left: 8rem;
-        }
-      }
-    }
   }
+
+  @media all and (min-width: $large) {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+  }
+
+}
 </style>
