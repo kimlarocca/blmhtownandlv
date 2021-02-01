@@ -9,11 +9,9 @@
       :altText="story.content.title"
       verticalAlignment="middle"
     >
-      <template slot="content">
-        <p class="u-space--bottom">
-          {{ story.content.description }}
-        </p>
-      </template>
+      <p class="u-space--bottom">
+        {{ story.content.description }}
+      </p>
     </content-card>
   </section>
 </template>

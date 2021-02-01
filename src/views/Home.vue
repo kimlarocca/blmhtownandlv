@@ -17,12 +17,9 @@
     <section class="l-container">
       <h1>{{ story.content.h1 }}</h1>
       <div class="u-align--center">
-        <a
-          class="button arrow"
-          :href="story.content.cta_url.url"
-        >
+        <v-button :href="story.content.cta_url.url" icon="fas fa-long-arrow-alt-right">
           {{ story.content.cta }}
-        </a>
+        </v-button>
       </div>
     </section>
     <v-spacer size="quin" />
@@ -54,6 +51,7 @@ import MainContent from '../components/MainContent'
 import LocalNews from '../components/LocalNews'
 import NationalNews from '../components/NationalNews'
 import VSpacer from 'vue-evolve/src/components/VSpacer'
+import VButton from 'vue-evolve/src/components/VButton'
 import storyblok from '../mixins/storyblok.mixin'
 
 export default {
@@ -79,6 +77,7 @@ export default {
     MainContent,
     LocalNews,
     NationalNews,
+    VButton,
     VSpacer
   }
 }
