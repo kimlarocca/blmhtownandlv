@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import SocialLink from 'vue-evolve/src/components/SocialLink'
+import SocialLink from 'vue-evolve/src/components/VIconsItem'
 import storyblok from '../mixins/storyblok.mixin'
 
 export default {

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Card from 'vue-evolve/src/components/Card'
+import Card from 'vue-evolve/src/components/VCard'
 import storyblok from '../mixins/storyblok.mixin'
 
 export default {
